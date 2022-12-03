@@ -1,0 +1,15 @@
+load res/TestImageWith4Pixels.ppm checker
+brighten 10 checker checkerBrighter
+red-component checker GrayscaleRed
+green-component checker GrayscaleGreen
+blue-component checker GrayscaleBlue
+value-component checker GrayscaleValue
+intensity-component checker GrayscaleIntensity
+luma-component checker GrayscaleLuma
+horizontal-flip checker checkerFlip
+vertical-flip checker checkerFlip
+greyscale checker checkerGreyscale
+sepia checker checkerSepia
+blur checker checkerBlur
+sharpen checker sharpening
+save res/TestFileScriptImage.png GrayscaleLuma
