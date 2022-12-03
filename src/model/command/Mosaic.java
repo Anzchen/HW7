@@ -23,32 +23,18 @@ public class Mosaic implements ImageFunctionObject {
     for (int i = 0; i < value; i++) {
       int height = (int) Math.floor(Math.random() * image.length);
       int width = (int) Math.floor(Math.random() * image[0].length);
-      image[height][width]
+//      image[height][width]
     }
 
     for (int r = 0; r < image.length; r++) {
       for (int c = 0; c < image[0].length; c ++) {
-        image[r][c].setRed(image[r][c].getRed() + this.value);
-        image[r][c].setGreen(image[r][c].getGreen() + this.value);
-        image[r][c].setBlue(image[r][c].getBlue() + this.value);
 
-        if (image[r][c].getRed() < 0) {
-          image[r][c].setRed(0);
-        } else if (image[r][c].getRed() > image[r][c].getMax()) {
-          image[r][c].setRed(image[r][c].getMax());
-        }
-        if (image[r][c].getGreen() < 0) {
-          image[r][c].setGreen(0);
-        } else if (image[r][c].getGreen() > image[r][c].getMax()) {
-          image[r][c].setGreen(image[r][c].getMax());
-        }
-        if (image[r][c].getBlue() < 0) {
-          image[r][c].setBlue(0);
-        } else if (image[r][c].getBlue() > image[r][c].getMax()) {
-          image[r][c].setBlue(image[r][c].getMax());
-        }
       }
     }
     return image;
+  }
+
+  public int distance() {
+    return 0;
   }
 }

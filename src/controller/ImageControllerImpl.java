@@ -9,6 +9,7 @@ import model.command.BrightenDarken;
 import model.command.FlipHorizontal;
 import model.command.FlipVertical;
 import model.command.Greyscale;
+import model.command.Mosaic;
 import model.command.Sharpen;
 import model.command.Transform;
 import model.command.ImageFunctionObject;
