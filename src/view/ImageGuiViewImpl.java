@@ -1,10 +1,6 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,17 +8,7 @@ import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JFrame;
-import javax.swing.BoxLayout;
-import javax.swing.BorderFactory;
-import javax.swing.JFileChooser;
-import javax.swing.JButton;
-import javax.swing.JSlider;
-import javax.swing.JComboBox;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 import model.ImageModel;
 import model.Pixel;
@@ -387,6 +373,35 @@ public class ImageGuiViewImpl implements ImageGuiView {
     });
     blurPanel.add(blurButton);
 
+
+    // This part is for Mosaic
+    JPanel mosaicPanel = new JPanel();
+    mosaicPanel.setBorder(BorderFactory.createTitledBorder("Mosaic"));
+    mosaicPanel.setLayout(new GridLayout(1, 1));
+    leftPanel.add(mosaicPanel);
+
+    JLabel spinnerLabel = new JLabel("Mosaic Seeds:");
+    SpinnerNumberModel valueModel = new SpinnerNumberModel(0, 0, 15000, 1);
+    JSpinner valueSpinner = new JSpinner(valueModel);
+    mosaicPanel.add(spinnerLabel);
+    mosaicPanel.add(valueSpinner);
+
+    JButton mosaicButton = new JButton("Apply");
+    mosaicButton.addActionListener(e -> {
+      if (this.currentName == null) {
+        throw new IllegalArgumentException("currently No image");
+      } else {
+        String newName = this.currentName.split("\\.")[0] + "Mosaic";
+        for (ViewEvents listener : listeners) {
+          listener.mosaicEvent((int) valueSpinner.getValue(), this.currentName, newName);
+
+        }
+        this.currentName = newName;
+      }
+    });
+    mosaicPanel.add(mosaicButton);
+
+    this.leftPanel.add(mosaicPanel);
   }
 
 

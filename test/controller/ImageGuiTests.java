@@ -283,4 +283,23 @@ public class ImageGuiTests {
     assertEquals(255, model.getImage("sepia")[1][1].getMax());
   }
 
+  @Test
+  public void testMosaicEvent() throws NoSuchFileException {
+    ImageModel model = new ImageModelImpl();
+    ImageGuiView view = new ImageGuiViewImpl();
+    ImageGuiControllerImpl controller = new ImageGuiControllerImpl(model, view);
+    controller.loadEvent("checker", "res/TestImageWith4Pixels.ppm");
+    assertEquals(101, model.getImage("checker")[0][0].getRed());
+    assertEquals(58, model.getImage("checker")[0][0].getBlue());
+    assertEquals(90, model.getImage("checker")[0][0].getGreen());
+    assertEquals(255, model.getImage("checker")[0][0].getMax());
+
+    controller.mosaicTestEvent(1, 100,"checker", "mosaic");
+
+    assertEquals(112, model.getImage("mosaic")[0][0].getRed());
+    assertEquals(90, model.getImage("mosaic")[0][0].getBlue());
+    assertEquals(108, model.getImage("mosaic")[0][0].getGreen());
+    assertEquals(255, model.getImage("mosaic")[0][0].getMax());
+  }
+
 }

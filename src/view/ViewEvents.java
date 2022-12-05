@@ -95,4 +95,23 @@ public interface ViewEvents {
   public void greyscaleEvent(String imageName, String newName);
 
 
+  /**
+   * An event mosaics an image.
+   *
+   * @param seeds The degree of mosaicking
+   * @param imageName The existing image name
+   * @param newName   The changed image name
+   */
+  public void mosaicEvent(int seeds, String imageName, String newName);
+
+
+  /**
+   * An event mosaics an image with a specific random seed for testing purposes.
+   *
+   * @param seeds The degree of mosaicking
+   * @param seedRandom The seed for Random
+   * @param imageName The existing image name
+   * @param newName The changed image name
+   */
+  public void mosaicTestEvent(int seeds, int seedRandom, String imageName, String newName);
 }

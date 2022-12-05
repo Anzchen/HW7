@@ -11,6 +11,7 @@ import model.command.FlipHorizontal;
 import model.command.FlipVertical;
 import model.command.Greyscale;
 import model.command.ImageFunctionObject;
+import model.command.Mosaic;
 import model.command.Sharpen;
 import model.command.Transform;
 import view.ImageGuiView;
@@ -103,6 +104,22 @@ public class ImageGuiControllerImpl implements ViewEvents {
   @Override
   public void sharpenEvent(String imageName, String newName) {
     ImageFunctionObject functionObject = new Sharpen();
+    this.model.process(functionObject, imageName, newName);
+    this.view.showCenterImage(newName, this.model.getImage(newName));
+    this.view.makeHistograms(this.model.getImage(newName));
+  }
+
+  @Override
+  public void mosaicEvent(int seeds, String imageName, String newName) {
+    ImageFunctionObject functionObject = new Mosaic(seeds);
+    this.model.process(functionObject, imageName, newName);
+    this.view.showCenterImage(newName, this.model.getImage(newName));
+    this.view.makeHistograms(this.model.getImage(newName));
+  }
+
+  @Override
+  public void mosaicTestEvent(int seeds, int randomSeed, String imageName, String newName) {
+    ImageFunctionObject functionObject = new Mosaic(seeds, randomSeed);
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
     this.view.makeHistograms(this.model.getImage(newName));

@@ -8,6 +8,8 @@ import java.io.StringReader;
 
 import model.ImageModel;
 import model.ImageModelImpl;
+import model.command.ImageFunctionObject;
+import model.command.Mosaic;
 
 import static org.junit.Assert.assertEquals;
 
@@ -663,5 +665,24 @@ public class ImageControllerImplTest {
     file.delete();
   }
 
+  @Test
+  public void testMosaic() throws IOException {
+    ImageModel model = new ImageModelImpl();
+    model.load("res/TestImageWith4Pixels.ppm", "checker");
+
+    assertEquals(101, model.getImage("checker")[0][0].getRed());
+    assertEquals(58, model.getImage("checker")[0][0].getBlue());
+    assertEquals(90, model.getImage("checker")[0][0].getGreen());
+    assertEquals(255, model.getImage("checker")[0][0].getMax());
+
+    ImageFunctionObject mosaic = new Mosaic(1, 100);
+    model.process(mosaic, "checker", "checkerM");
+
+    assertEquals(112, model.getImage("checkerM")[0][0].getRed());
+    assertEquals(90, model.getImage("checkerM")[0][0].getBlue());
+    assertEquals(108, model.getImage("checkerM")[0][0].getGreen());
+    assertEquals(255, model.getImage("checkerM")[0][0].getMax());
+
+  }
 
 }
