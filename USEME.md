@@ -76,6 +76,10 @@ Sharpen the image
 ```
 sharpen (image-name, new-image-name)
 ```
+Mosaic the image
+```
+mosaic [#-seeds] (image-name, new-image-name)
+```
 Run the program using a script file
 ```
 file (file-name)

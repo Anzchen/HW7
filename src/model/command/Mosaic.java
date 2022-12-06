@@ -22,7 +22,7 @@ public class Mosaic implements ImageFunctionObject {
   private Random random;
 
   /**
-   * The constructor sets how many seeds we are using
+   * The constructor sets how many seeds we are using.
    * @param value How many seeds to break down the image into
    * @throws IllegalArgumentException If value is not positive
    */
@@ -37,7 +37,7 @@ public class Mosaic implements ImageFunctionObject {
 
   /**
    * The constructor sets how many seeds we are using,
-   * using a known-seed Random for testing purposes
+   * using a known-seed Random for testing purposes.
    *
    * @param value How many seeds to break down the image into
    * @param seed known-seed for Random
@@ -54,14 +54,13 @@ public class Mosaic implements ImageFunctionObject {
 
   @Override
   public PixelRGB[][] apply(PixelRGB[][] image) {
-      for (int i = 0; i < value; i++) {
-        do {
-          height = (int) Math.floor(random.nextDouble() * image.length);
-          width = (int) Math.floor(random.nextDouble() * image[0].length);
-        }while(seedArray.contains(Arrays.asList(height, width)));
-        seedArray.add(Arrays.asList(height,width));
-      }
-
+    for (int i = 0; i < value; i++) {
+      do {
+        height = (int) Math.floor(random.nextDouble() * image.length);
+        width = (int) Math.floor(random.nextDouble() * image[0].length);
+      } while (seedArray.contains(Arrays.asList(height, width)));
+      seedArray.add(Arrays.asList(height,width));
+    }
 
     for (int i = 0; i < value; i++) {
       this.clusters.add(new ArrayList<Pixel>());
@@ -70,11 +69,12 @@ public class Mosaic implements ImageFunctionObject {
 
     for (int r = 0; r < image.length; r++) {
       for (int c = 0; c < image[0].length; c ++) {
-
         this.lowestDistance = this.distance(seedArray.get(0).get(0), seedArray.get(0).get(1), r, c);
         for (int i = 1; i < value; i++) {
-          if (this.distance(seedArray.get(i).get(0), seedArray.get(i).get(1), r, c) < lowestDistance) {
-            this.lowestDistance = this.distance(seedArray.get(i).get(0), seedArray.get(i).get(1), r, c);
+          if (this.distance(seedArray.get(i).get(0), seedArray.get(i).get(1), r, c)
+                  < lowestDistance) {
+            this.lowestDistance =
+                    this.distance(seedArray.get(i).get(0), seedArray.get(i).get(1), r, c);
             this.holder = i;
           }
         }
@@ -105,13 +105,13 @@ public class Mosaic implements ImageFunctionObject {
   }
 
   /**
-   * Helper method for finding distance between a given pixel and given seed pixel
+   * Helper method for finding distance between a given pixel and given seed pixel.
    *
-   * @param seedx
-   * @param seedy
-   * @param pixelx
-   * @param pixely
-   * @return
+   * @param seedx the x location of the seed.
+   * @param seedy the y location of the seed.
+   * @param pixelx the x location of the pixel.
+   * @param pixely the y location of the pixel.
+   * @return the distance between the seed and the pixel.
    */
   private int distance(int seedx, int seedy, int pixelx, int pixely) {
     return (int) Math.round(
