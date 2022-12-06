@@ -1,0 +1,51 @@
+Partner Code Review
+By Anthony Chen and Christine Lee
+
+Qinrong and Jenna did an amazing job with their code and their overall design was relatively
+good. There were some features in the MVC design that were not properly decoupled. If we were to
+try to apply our controller to their model, or our model to their controller, it would not work
+because the functions are not fully separated.
+
+The Model:
+- ImageModel interface was fairly flexible and had the necessary methods
+    - Also had some unnecessary methods and enums
+- There was no Image interface/class, so the images were purely represented as 2D arrays of Pixels.
+    - The model contained an RGBVIL enum, which fits better in an Image class since it is info about
+    a single image, not relating to model.
+- The Pixel interface and PixelRGB implementation is mostly good
+    - Could have added intensity and luma as a field, which gets used later for greyscale.
+    - Setter methods were not necessary
+- Load/Save were implemented within the model, which we believe is not the proper design.
+    - Load/Save are not needed by the model because the model should only have the ability to add
+    and get photos from its photo map, given an Image. Reading and creating image files should have
+    stayed within the controller.
+    - Though they should have been implemented somewhere else, the load and save methods are very
+    clean and we liked the use of NoSuchFileException.
+- The good thing about their model is that there are not two separate models for text/script and
+the GUI view, so good job on that.
+
+
+The Controller:
+- ImageController interface is good, but we believe that load and save should be in the controller,
+not the model.
+- ImageControllerImpl looks good, but the code could be more compact if they used a map to create
+command objects rather than a switch statement.
+- ImageGUIControllerImpl implements ViewEvents, which is an interface that accounts for each type of
+event from the view. This design seems to be fine, but it does not make sense that the interface
+is in the view directory while the class that implements it is in the controller directory.
+    - Having a method for each image transformation is quite redundant and makes the code much
+    longer than it needs to be. I would propose that our provider make use of the command design
+    pattern since there are already function objects for each transformation.
+
+The View:
+- Overall, the view is solid and there are no noticeable flaws in the view.
+- It appears that instead of having a scrollable panel for large images, the provider used some
+sort of Image scaling to fit the image into the center panel no matter what size.
+- Histograms are upside down, which may not be preferred by all clients.
+    - Histograms seem to work well and quickly.
+- Buttons and options are very clear and easy to use.
+- Overall design is clean, and it was fairly simple to add new features.
+
+No changes were made to the overall design, and we did not have to ask our provider to fix any of
+their code. There were little to no limitations in their design, just that their design may not have
+been the most efficient.
