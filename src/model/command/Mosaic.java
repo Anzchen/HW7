@@ -13,8 +13,6 @@ import model.PixelRGB;
  */
 public class Mosaic implements ImageFunctionObject {
   private final int value;
-  private int height;
-  private int width;
   private int holder;
   private int lowestDistance;
   private ArrayList<List<Integer>> seedArray;
@@ -54,11 +52,14 @@ public class Mosaic implements ImageFunctionObject {
 
   @Override
   public PixelRGB[][] apply(PixelRGB[][] image) {
+    int height;
+    int width;
     for (int i = 0; i < value; i++) {
       do {
         height = (int) Math.floor(random.nextDouble() * image.length);
         width = (int) Math.floor(random.nextDouble() * image[0].length);
-      } while (seedArray.contains(Arrays.asList(height, width)));
+      }
+      while (seedArray.contains(Arrays.asList(height, width)));
       seedArray.add(Arrays.asList(height,width));
     }
 

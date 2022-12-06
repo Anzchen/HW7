@@ -12,7 +12,19 @@ import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JSlider;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.JSpinner;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 import model.ImageModel;
 import model.Pixel;
